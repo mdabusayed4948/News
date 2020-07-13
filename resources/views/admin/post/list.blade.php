@@ -107,6 +107,7 @@
 
                                         <div class="btn-group">
                                             @permission(['Post Add','All','Post Update'])
+                                            <a href="{{ url('/back/comment/'.$row->id) }}"><button class="btn btn-info" ><i class="fa fa-commenting-o" data-toggle="tooltip" title="Comment"></i></button></a>
                                             <a href="{{ url('/back/post/edit/'.$row->id) }}"><button class="btn btn-warning" ><i class="fa fa-pencil" data-toggle="tooltip" title="Edit"></i></button></a>
                                             @endpermission
                                             @permission(['Post Add','All'])
