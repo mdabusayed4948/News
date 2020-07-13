@@ -80,6 +80,8 @@ Route::group(['prefix'=>'back','middleware'=>'auth'], function(){
     Route::put('/post/update/{id}', ['uses'=>'Admin\PostController@update','as'=>'post-update','middleware'=>'permission:Post Update|All']);
     Route::delete('/post/delete/{id}', ['uses'=>'Admin\PostController@destroy','as'=>'post-delete','middleware'=>'permission:Post Delete|All']);
 
+    //=============For Comment Area======================
+    Route::get('/comment/{id}', ['uses'=>'Admin\CommentController@index','as'=>'comment-list','middleware'=>'permission:Post List|All']);
 });
 
 
