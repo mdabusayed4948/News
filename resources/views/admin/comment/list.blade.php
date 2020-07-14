@@ -86,7 +86,7 @@
 
                                             <div class="btn-group">
 
-                                                <a href="{{ url('/back/comment/reply/'.$row->id) }}"><button class="btn btn-info btn-sm" >Reply</button></a>
+                                                <a href="{{ url('/back/comment/reply/'.$row->post_id) }}"><button class="btn btn-info btn-sm" >Reply</button></a>
 
                                             </div>
 
