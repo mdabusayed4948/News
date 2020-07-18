@@ -1,5 +1,5 @@
 @extends('admin.layout.master')
-@section('title','Update Setting')
+@section('title','Update Settings')
 @push('css') {{-- Create CSS --}}
 
 @endpush
@@ -41,6 +41,17 @@
                             <!-- Credit Card -->
                             <div id="pay-invoice">
                                 <div class="card-body">
+                                    @if($message = Session::get('message'))
+                                        {{-- @if(session()->has('message')) --}}
+                                        <div class="alert  alert-success alert-dismissible fade show" role="alert">
+                                            <span class="badge badge-pill badge-success">Success</span>
+                                            {{ $message }}
+                                            {{-- {{ session()->get('message') }} --}}
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                    @endif
 
                                     @if(count($errors) > 0)
                                         <div class="alert  alert-danger alert-dismissible fade show" role="alert">
@@ -62,13 +73,37 @@
                                     @endif
 
 
-                                    {{ Form::open(['url' => '/back/setting/update','method'=>'put','enctype'=>'multipart/form-data']) }}
+                                    {{ Form::open(['url' => '/back/settings/update','method'=>'put','enctype'=>'multipart/form-data']) }}
 
                                     <div class="form-group">
 
                                         {{ Form::label('name', 'System Name', array('class'=>'control-label mb-1')) }}
 
                                         {{ Form::text('name', $system_name, ['class'=>'form-control', 'id'=>'name']) }}
+
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        {{ Form::label('favicon', 'Favicon : ', array('class'=>'control-label mb-1')) }}
+
+                                        {{ Form::file('favicon', ['class'=>'form-control', 'id'=>'favicon']) }}
+
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        {{ Form::label('front_logo', 'Front Logo : ', array('class'=>'control-label mb-1')) }}
+
+                                        {{ Form::file('front_logo', ['class'=>'form-control', 'id'=>'front_logo']) }}
+
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        {{ Form::label('admin_logo', 'Admin Logo : ', array('class'=>'control-label mb-1')) }}
+
+                                        {{ Form::file('admin_logo', ['class'=>'form-control', 'id'=>'admin_logo']) }}
 
                                     </div>
 

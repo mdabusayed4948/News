@@ -29,7 +29,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="logo">
-                        <a href="index.html"><img src="{{ asset('public/fronts/img/logo.png') }}" alt="Tech NewsLogo"></a>
+                        <a href="index.html"><img src="{{ asset('public/others') }}/{{ $shareData['front _logo'] }}" alt="Tech NewsLogo"></a>
                     </div>
                     <!-- Logo Section -->
                 </div>

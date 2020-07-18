@@ -85,6 +85,10 @@ Route::group(['prefix'=>'back','middleware'=>'auth'], function(){
     Route::get('/comment/reply/{id}', ['uses'=>'Admin\CommentController@reply','as'=>'comment-view','middleware'=>'permission:Post List|All']);
     Route::post('/comment/reply', ['uses'=>'Admin\CommentController@store','as'=>'comment-reply','middleware'=>'permission:Post List|All']);
     Route::put('/comment/status/{id}', ['uses'=>'Admin\CommentController@status','as'=>'comment-status','middleware'=>'permission:Post List|All']);
+
+    //=============For Settings Area======================
+    Route::get('/settings', ['uses'=>'Admin\SettingController@index','as'=>'setting','middleware'=>'permission:System Settings|All']);
+    Route::put('/settings/update', ['uses'=>'Admin\SettingController@update','as'=>'settings-update','middleware'=>'permission:System Settings|All']);
 });
 
 
