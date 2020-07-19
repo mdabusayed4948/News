@@ -5,11 +5,11 @@
                 <div class="col-md-4">
                     <div class="left_section">
                                             <span class="date">
-                                                Sunday .
+                                                {{ date("l") }} .
                                             </span>
                         <!-- Date -->
                                             <span class="time">
-                                                09 August . 2016
+                                                {{ date("j F. Y") }}
                                             </span>
                         <!-- Time -->
                         <div class="social">
@@ -29,7 +29,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="logo">
-                        <a href="index.html"><img src="{{ asset('public/others') }}/{{ $shareData['front _logo'] }}" alt="Tech NewsLogo"></a>
+                        <a href="{{ url('/') }}"><img src="{{ asset('public/others') }}/{{ $shareData['front_logo'] }}" alt="Tech NewsLogo"></a>
                     </div>
                     <!-- Logo Section -->
                 </div>
@@ -91,53 +91,13 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="#navbar-collapse-1">
                         <ul class="nav navbar-nav main-nav">
-                            <li class="active"><a href="index.html">News</a></li>
-                            <li><a href="category.html">Mobile</a></li>
-                            <li><a href="blog.html">Tablet</a></li>
-                            <li><a href="blog.html">Gadgets</a></li>
-                            <li><a href="blog.html">Camera</a></li>
-                            <li><a href="blog.html">Design</a></li>
-                            <li class="dropdown m-menu-fw"><a href="#" data-toggle="dropdown" class="dropdown-toggle">More
-                                <span><i class="fa fa-angle-down"></i></span></a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <div class="m-menu-content">
-                                            <ul class="col-sm-3">
-                                                <li class="dropdown-header">Widget Haeder</li>
-                                                <li><a href="#">Awesome Features</a></li>
-                                                <li><a href="#">Clean Interface</a></li>
-                                                <li><a href="#">Available Possibilities</a></li>
-                                                <li><a href="#">Responsive Design</a></li>
-                                                <li><a href="#">Pixel Perfect Graphics</a></li>
-                                            </ul>
-                                            <ul class="col-sm-3">
-                                                <li class="dropdown-header">Widget Haeder</li>
-                                                <li><a href="#">Awesome Features</a></li>
-                                                <li><a href="#">Clean Interface</a></li>
-                                                <li><a href="#">Available Possibilities</a></li>
-                                                <li><a href="#">Responsive Design</a></li>
-                                                <li><a href="#">Pixel Perfect Graphics</a></li>
-                                            </ul>
-                                            <ul class="col-sm-3">
-                                                <li class="dropdown-header">Widget Haeder</li>
-                                                <li><a href="#">Awesome Features</a></li>
-                                                <li><a href="#">Clean Interface</a></li>
-                                                <li><a href="#">Available Possibilities</a></li>
-                                                <li><a href="#">Responsive Design</a></li>
-                                                <li><a href="#">Pixel Perfect Graphics</a></li>
-                                            </ul>
-                                            <ul class="col-sm-3">
-                                                <li class="dropdown-header">Widget Haeder</li>
-                                                <li><a href="#">Awesome Features</a></li>
-                                                <li><a href="#">Clean Interface</a></li>
-                                                <li><a href="#">Available Possibilities</a></li>
-                                                <li><a href="#">Responsive Design</a></li>
-                                                <li><a href="#">Pixel Perfect Graphics</a></li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
+                            <li class="active"><a href="{{ url('/') }}">Home</a></li>
+                            @foreach($shareData['categories'] as $category)
+                            <li><a href="{{ url('/category') }}/{{ $category->id }}">{{ $category->name }}</a></li>
+                            @endforeach
+                            @foreach($shareData['author'] as $author)
+                                <li><a href="{{ url('/author') }}/{{ $author->id }}">{{ $author->name }}</a></li>
+                            @endforeach
                         </ul>
                     </div>
                     <!-- .navbar-collapse -->

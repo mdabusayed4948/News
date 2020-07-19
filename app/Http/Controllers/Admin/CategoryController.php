@@ -49,7 +49,7 @@ class CategoryController extends Controller
 //        ]);
 
         $category = new Category();
-        $category->name = $request->name;
+        $category->name = ucwords($request->name);
         $category->status = 1;
         $category->save();
         return redirect()->action('Admin\CategoryController@index')->with('message','Category Successfully Created.');
@@ -96,7 +96,7 @@ class CategoryController extends Controller
 //        ]);
 
         $category = Category::find($id);
-        $category->name = $request->name;
+        $category->name = ucwords($request->name);
         $category->save();
         return redirect()->action('Admin\CategoryController@index')->with('message','Category Successfully Updated.');
     }
