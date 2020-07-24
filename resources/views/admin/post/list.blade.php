@@ -79,7 +79,7 @@
                                     <td>{{ ++$i }}</td>
                                     <td>
                                         @if (file_exists(public_path('/post/').$row->thumb_image))
-                                            <img src="{{ asset('public/post') }}/{{ $row->list_image }}" class="img-responsive img-thumbnail">
+                                            <img src="{{ asset('public/post') }}/{{ $row->thumb_image }}" class="img-responsive img-thumbnail">
                                         @endif
                                     </td>
                                     <td>{{ $row->title }}</td>
@@ -106,7 +106,7 @@
                                     <td width="5%">
 
                                         <div class="btn-group">
-                                            @permission(['Post Add','All','Post Update'])
+                                            @permission(['Post Add','All','Post Update','Post Edit'])
                                             <a href="{{ url('/back/comment/'.$row->id) }}"><button class="btn btn-info" ><i class="fa fa-commenting-o" data-toggle="tooltip" title="Comment"></i></button></a>
                                             <a href="{{ url('/back/post/edit/'.$row->id) }}"><button class="btn btn-warning" ><i class="fa fa-pencil" data-toggle="tooltip" title="Edit"></i></button></a>
                                             @endpermission

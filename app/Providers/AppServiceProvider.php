@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Category;
+use App\Post;
 use App\Setting;
 use App\User;
 use Illuminate\Support\ServiceProvider;
@@ -28,13 +29,17 @@ class AppServiceProvider extends ServiceProvider
         }
         $categories = Category::where('status',1)->get();
         $author = User::where('type','!=',1)->get();
+        $most_viewed = Post::with(['creator','comments'])->where('status',1)->orderBy('view_count','DESC')->limit(5)->get();
+        $most_commented = Post::withCount('comments')->where('status',1)->orderBy('comments_count','DESC')->limit(5)->get();
         $shareData = array(
-            'system_name' => $system_name,
-            'favicon'     => $favicon,
-            'front_logo'  => $front_logo,
-            'admin_logo'  => $admin_logo,
-            'categories'  => $categories,
-            'author'      => $author
+            'system_name'    => $system_name,
+            'favicon'        => $favicon,
+            'front_logo'     => $front_logo,
+            'admin_logo'     => $admin_logo,
+            'categories'     => $categories,
+            'author'         => $author,
+            'most_viewed'    => $most_viewed,
+            'most_commented' => $most_commented
         );
         view()->share('shareData', $shareData);
     }

@@ -70,8 +70,8 @@ class PostController extends Controller
         $thumb_image = 'post_thumb_'.$post->id.'.'.$extension;
         $list_image  = 'post_list_'.$post->id.'.'.$extension;
         Image::make($file)->resize(653,569)->save(public_path('/post/'.$main_image));
-        Image::make($file)->resize(360,309)->save(public_path('/post/'.$thumb_image));
-        Image::make($file)->resize(122,122)->save(public_path('/post/'.$list_image));
+        Image::make($file)->resize(360,309)->save(public_path('/post/'.$list_image));
+        Image::make($file)->resize(122,122)->save(public_path('/post/'.$thumb_image));
         $post->main_image  = $main_image;
         $post->thumb_image = $thumb_image;
         $post->list_image  = $list_image;
@@ -128,8 +128,8 @@ class PostController extends Controller
             $thumb_image = 'post_thumb_'.$post->id.'.'.$extension;
             $list_image  = 'post_list_'.$post->id.'.'.$extension;
             Image::make($file)->resize(653,569)->save(public_path('/post/'.$main_image));
-            Image::make($file)->resize(360,309)->save(public_path('/post/'.$thumb_image));
-            Image::make($file)->resize(122,122)->save(public_path('/post/'.$list_image));
+            Image::make($file)->resize(360,309)->save(public_path('/post/'.$list_image));
+            Image::make($file)->resize(122,122)->save(public_path('/post/'.$thumb_image));
             $post->main_image  = $main_image;
             $post->thumb_image = $thumb_image;
             $post->list_image  = $list_image;
