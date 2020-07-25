@@ -94,13 +94,14 @@
 <div class="row">
 <div class="col-md-8">
 <div class="category_section mobile">
-    <div class="article_title header_purple">
-        <h2><a href="category.html" target="_self">Mobile</a></h2>
-    </div>
-    <!----article_title------>
     @foreach ($category_posts as $category)
         @foreach ($category->posts as $key => $item)
             @if ($key === 0)
+    <div class="article_title header_purple">
+        <h2><a href="{{ url('/category') }}/{{ $category->id }}" target="_self">{{ $category->name }}</a></h2>
+    </div>
+    <!----article_title------>
+
                 <div class="category_article_wrapper">
                     <div class="row">
                         <div class="col-md-6">
@@ -115,13 +116,13 @@
                             <span class="tag purple">{{ $category->name }}</span>
 
                             <div class="category_article_title">
-                                <h2><a href="{{ url('/details') }}/{{ $item->slug }}" target="_self">{{ $item->title }} </a></h2>
+                                <h2><a href="{{ url('/details') }}/{{ $item->slug }}" >{{ $item->title }} </a></h2>
                             </div>
                             <!----category_article_title------>
                             <div class="category_article_date"><a href="{{ url('/author') }}/{{ $item->creator->id }}">{{ $item->creator->name }}</a>, {{ date('F j,Y', strtotime($item->created_at)) }}</div>
                             <!----category_article_date------>
                             <div class="category_article_content">
-                                {{ str_limit($item->short_description, 100,'.....' ) }}
+                                {{ str_limit($item->short_description, 200,'.....' ) }}
                             </div>
                             <!----category_article_content------>
                             <div class="media_social">
@@ -136,31 +137,31 @@
                 <div class="category_article_wrapper">
                 <div class="row">
                     @endif
-                    <div class="col-md-6">
+                    <div class="col-md-6" style="margin-bottom: 2%">
                         <div class="media">
                             <div class="media-left">
-                                <a href="#"><img class="media-object" src="{{ asset('public/fronts/img/cat-mobi-sm1.jpg') }}"
-                                                 alt="Generic placeholder image"></a>
+                                <a href="{{ url('/details') }}/{{ $item->slug }}"><img class="media-object" src="{{ asset('public/post') }}/{{ $item->thumb_image }}"
+                                                 alt="{{ $item->title }}"></a>
                             </div>
                             <div class="media-body">
-                                <span class="tag purple">Mobile</span>
+                                <span class="tag purple">{{ $category->name }}</span>
 
-                                <h3 class="media-heading"><a href="single.html" target="_self">Apple launches photo-centric
-                                        wrist watch for Android</a></h3>
-                                <span class="media-date"><a href="#">10Aug- 2015</a>,  by: <a href="#">Eric joan</a></span>
+                                <h3 class="media-heading"><a href="{{ url('/details') }}/{{ $item->slug }}">{{ $item->title }}</a></h3>
+                                <span class="media-date"><a href="{{ url('/author') }}/{{ $item->creator->id }}">{{ $item->creator->name }}</a>, {{ date('F j,Y', strtotime($item->created_at)) }}</span>
 
                                 <div class="media_social">
-                                    <span><a href="#"><i class="fa fa-share-alt"></i>424</a> Shares</span>
-                                    <span><a href="#"><i class="fa fa-comments-o"></i>4</a> Comments</span>
+                                    <span><a href="#"><i class="fa fa-comments-o"></i>{{ count($item->comments) }}</a> Comments</span>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    @if($loop->last)
                 </div>
             </div>
             @endif
+            @endif
         @endforeach
-            <p class="divider"><a href="#">More News&nbsp;&raquo;</a></p>
+            <p class="divider"><a href="{{ url('/category') }}/{{ $category->id }}">More News&nbsp;&raquo;</a></p>
     @endforeach
 </div>
 <!-- Mobile News Section -->
