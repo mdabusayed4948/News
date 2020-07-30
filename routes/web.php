@@ -14,8 +14,11 @@
 //=============For Front Area======================
 
 Route::get('/', 'HomePageController@index');
-Route::get('/listing', 'ListingPageController@index');
+Route::get('/category/{id}', 'ListingPageController@listing');
+Route::get('/author/{id}', 'ListingPageController@listing');
+//Route::get('/listing', 'ListingPageController@index');
 Route::get('/details', 'DetailsPageController@index');
+Route::get('/details/{slug}', 'DetailsPageController@index');
 
 
 //=============For Admin Area======================

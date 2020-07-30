@@ -7,9 +7,11 @@
         <div class="row">
             <ol class="breadcrumb">
                 <li><a href="#">Home</a></li>
-                <li><a href="#">News</a></li>
-                <li><a href="#">Tech</a></li>
-                <li class="active"><a href="#">Mobile</a></li>
+                @foreach ($posts as $key => $post)
+                @if($key === 0)
+                <li class="active"><a href="{{ url('/category') }}/{{ $post->category_id }}">{{ $post->category->name }}</a></li>
+                @endif
+                @endforeach
             </ol>
         </div>
     </div>
@@ -18,72 +20,69 @@
 <div class="container">
 <div class="row">
 <div class="col-md-8">
+@foreach ($posts as $key => $post)
+@if($key === 0)
 <div class="entity_wrapper">
     <div class="entity_title header_purple">
-        <h1><a href="category.html" target="_blank">Mobile</a></h1>
+        <h1><a href="{{ url('/category') }}/{{ $post->category_id }}">{{ $post->category->name }}</a></h1>
     </div>
     <!-- entity_title -->
 
     <div class="entity_thumb">
-        <img class="img-responsive" src="{{ asset('public/fronts/img/category_img_top.jpg') }}" alt="feature-top">
+        <img class="img-responsive" src="{{ asset('public/post') }}/{{ $post->main_image }}" alt="{{ $post->title }}">
     </div>
     <!-- entity_thumb -->
 
     <div class="entity_title">
-        <a href="single.html" target="_blank"><h3> Airbnb launches photo-centric app for iPads and Android
-            tablets. </h3></a>
+        <a href="{{ url('/details') }}/{{ $post->slug }}" ><h3> {{ $post->title }}</h3></a>
     </div>
     <!-- entity_title -->
 
     <div class="entity_meta">
-        <a href="#">10Aug- 2015</a>, by: <a href="#">Eric joan</a>
+        <a href="{{ url('/author') }}/{{ $post->creator->id }}">{{ $post->creator->name }}</a>, {{ date('F j,Y', strtotime($post->created_at)) }}
     </div>
     <!-- entity_meta -->
 
     <div class="entity_content">
-        Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users
-        after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.
+        {{ str_limit($post->short_description, 250,'.....' ) }}
     </div>
     <!-- entity_content -->
 
     <div class="entity_social">
-        <span><i class="fa fa-share-alt"></i>424 <a href="#">Shares</a> </span>
-        <span><i class="fa fa-comments-o"></i>4 <a href="#">Comments</a> </span>
+        <span><i class="fa fa-comments-o"></i>{{ count($post->comments) }} <a href="#">Comments</a> </span>
     </div>
     <!-- entity_social -->
 
 </div>
 <!-- entity_wrapper -->
-
+@else
+@if($key === 1)
 <div class="row">
-    <div class="col-md-6">
+    @endif
+    <div class="col-md-6" style="min-height: 55px; margin-bottom: 2%">
         <div class="category_article_body">
             <div class="top_article_img">
-                <img class="img-fluid" src="{{ asset('public/fronts/img/category_img1.jpg') }}" alt="feature-top">
+                <img class="img-fluid" src="{{ asset('public/post') }}/{{ $post->list_image }}" alt="{{ $post->title }}">
             </div>
             <!-- top_article_img -->
 
             <div class="category_article_title">
-                <h5><a href="single.html" target="_blank">Airbnb launches photo-centric app for iPads and Android
-                    tablets. </a></h5>
+                <h5><a href="{{ url('/details') }}/{{ $post->slug }}" >{{ $post->title }}</a></h5>
             </div>
             <!-- category_article_title -->
 
             <div class="article_date">
-                <a href="#">10Aug- 2015</a>, by: <a href="#">Eric joan</a>
+                <a href="{{ url('/author') }}/{{ $post->creator->id }}">{{ $post->creator->name }}</a>, {{ date('F j,Y', strtotime($post->created_at)) }}
             </div>
             <!-- article_date -->
 
             <div class="category_article_content">
-                Collaboratively administrate empowered markets via plug-and-play networks.
-                Dynamically procrastinate B2C users after installed base benefits. Dramatically
-                visualize customer directed convergence without revolutionary ROI.
+                {{ str_limit($post->short_description, 250,'.....' ) }}
             </div>
             <!-- category_article_content -->
 
             <div class="article_social">
-                <span><a href="#"><i class="fa fa-share-alt"></i>424 </a> Shares</span>
-                <span><i class="fa fa-comments-o"></i><a href="#">4</a> Comments</span>
+                <span><i class="fa fa-comments-o"></i><a href="#">{{ count($post->comments) }}</a> Comments</span>
             </div>
             <!-- article_social -->
 
@@ -92,69 +91,23 @@
 
     </div>
     <!-- col-md-6 -->
-
-    <div class="col-md-6">
-        <div class="category_article_body">
-            <div class="top_article_img">
-                <img class="img-responsive" src="{{ asset('public/fronts/img/category_img2.jpg') }}" alt="feature-top">
-            </div>
-            <!-- top_article_img -->
-
-            <div class="category_article_title">
-                <h5><a href="single.html" target="_blank">Airbnb launches photo-centric app for iPads and Android
-                    tablets. </a></h5>
-            </div>
-            <!-- category_article_title -->
-
-            <div class="article_date">
-                <a href="#">10Aug- 2015</a>, by: <a href="#">Eric joan</a>
-            </div>
-            <!-- article_date -->
-
-            <div class="category_article_content">
-                Collaboratively administrate empowered markets via plug-and-play networks.
-                Dynamically procrastinate B2C users after installed base benefits. Dramatically
-                visualize customer directed convergence without revolutionary ROI.
-            </div>
-            <!-- category_article_content -->
-
-            <div class="article_social">
-                <span><a href="#"><i class="fa fa-share-alt"></i>424 </a> Shares</span>
-                <span><i class="fa fa-comments-o"></i><a href="#">4</a> Comments</span>
-            </div>
-            <!-- article_social -->
-
-        </div>
-        <!-- category_article_body -->
-
-    </div>
-    <!-- col-md-6 -->
+@if($loop->last)
 
 </div>
 <!-- row -->
+@endif
+@endif
+@endforeach
+
+<div class="text-center">
+    {{ $posts->links() }}
+</div>
 
 <div class="widget_advertisement">
     <img class="img-responsive" src="{{ asset('public/fronts/img/category_advertisement.jpg') }}" alt="feature-top">
 </div>
 <!-- widget_advertisement -->
 
-
-<nav aria-label="Page navigation" class="pagination_section">
-    <ul class="pagination">
-        <li>
-            <a href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span> </a>
-        </li>
-        <li><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li>
-            <a href="#" aria-label="Next" class="active"> <span aria-hidden="true">&raquo;</span> </a>
-        </li>
-    </ul>
-</nav>
-<!-- navigation -->
 
 </div>
 <!-- col-md-8 -->
