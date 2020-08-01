@@ -15,7 +15,13 @@ class ListingPageController extends Controller
     }
 
     public function listing($id){
-        $posts = Post::with(['comments','category','creator'])->where('status', 1)->where('category_id', $id)->orWhere('created_by', $id)->orderBy('id','DESC')->paginate(5);
+        $posts = Post::with(['comments','category','creator'])->where('status', 1)->Where('created_by', $id)->orderBy('id','DESC')->paginate(5);
+        return view('front.listing', compact('posts'));
+
+    }
+
+    public function listing1($id){
+        $posts = Post::with(['comments','category','creator'])->where('status', 1)->where('category_id', $id)->orderBy('id','DESC')->paginate(5);
         return view('front.listing', compact('posts'));
 
     }

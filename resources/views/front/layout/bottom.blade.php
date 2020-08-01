@@ -12,3 +12,12 @@
 
 <!-- Theme Script -->
 <script src="{{ asset('public/fronts/js/script.js') }}"></script>
+
+<!-- Toastr Script -->
+<script src="{{ asset('public/fronts/js/toastr.min.js') }}"></script>
+
+<script>
+    @if(Session::has('success'))
+    toastr.success('{{ Session::get('success') }}');
+    @endif
+</script>

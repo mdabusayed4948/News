@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\category\CreateCategoryRequest;
 use App\Http\Requests\Admin\category\UpdateCategoryRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Session;
 
 class CategoryController extends Controller
 {
@@ -99,6 +100,7 @@ class CategoryController extends Controller
         $category->name = ucwords($request->name);
         $category->save();
         return redirect()->action('Admin\CategoryController@index')->with('message','Category Successfully Updated.');
+        Session::flash('success', 'Category Successfully Updated.');
     }
 
     /**

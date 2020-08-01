@@ -39,12 +39,13 @@
     <!-- entity_title -->
 
     <div class="entity_meta">
-        <a href="{{ url('/author') }}/{{ $post->creator->id }}">{{ $post->creator->name }}</a>, {{ date('F j,Y', strtotime($post->created_at)) }}
+        {{ date('j F - y', strtotime($post->created_at)) }},  by: <a href="{{ url('/author') }}/{{ $post->creator->id }}">{{ $post->creator->name }}</a>
+
     </div>
     <!-- entity_meta -->
 
     <div class="entity_content">
-        {{ str_limit($post->short_description, 250,'.....' ) }}
+        {{ str_limit($post->short_description, 200,'.....' ) }}
     </div>
     <!-- entity_content -->
 
@@ -67,7 +68,7 @@
             <!-- top_article_img -->
 
             <div class="category_article_title">
-                <h5><a href="{{ url('/details') }}/{{ $post->slug }}" >{{ $post->title }}</a></h5>
+                <h5><a href="{{ url('/details') }}/{{ $post->slug }}" >{{ str_limit($post->title, 40,'...' ) }}</a></h5>
             </div>
             <!-- category_article_title -->
 
@@ -77,14 +78,9 @@
             <!-- article_date -->
 
             <div class="category_article_content">
-                {{ str_limit($post->short_description, 250,'.....' ) }}
+                {{ str_limit($post->short_description, 100,'...' ) }}
             </div>
             <!-- category_article_content -->
-
-            <div class="article_social">
-                <span><i class="fa fa-comments-o"></i><a href="#">{{ count($post->comments) }}</a> Comments</span>
-            </div>
-            <!-- article_social -->
 
         </div>
         <!-- category_article_body -->
@@ -103,10 +99,6 @@
     {{ $posts->links() }}
 </div>
 
-<div class="widget_advertisement">
-    <img class="img-responsive" src="{{ asset('public/fronts/img/category_advertisement.jpg') }}" alt="feature-top">
-</div>
-<!-- widget_advertisement -->
 
 
 </div>
@@ -130,7 +122,7 @@
 
                         <div class="widget_article_social">
                 <span>
-                    <a href="single.html" target="_self"><i class="fa fa-comments-o"></i>{{ count($item->comments) }}</a> Comments
+                    <a href="#" target="_self"><i class="fa fa-comments-o"></i>{{ count($item->comments) }}</a> Comments
                 </span>
                         </div>
                     </div>

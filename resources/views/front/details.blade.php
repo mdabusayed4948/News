@@ -86,48 +86,41 @@
         <h2>Readers Comment</h2>
     </div>
     <!-- entity_title -->
-
+    @foreach ($post->comments as $comment)
+    @if($comment->status === 1)
     <div class="media">
         <div class="media-left">
             <a href="#">
-                <img alt="64x64" class="media-object" data-src="{{ asset('public/fronts/img/reader_img1.jpg') }}"
-                     src="{{ asset('public/fronts/img/reader_img1.jpg') }}" data-holder-rendered="true">
+                <img alt="64x64" class="media-object" data-src="{{ asset('public/others/user.png') }}"
+                     src="{{ asset('public/others/user.png') }}" data-holder-rendered="true" width="60">
             </a>
         </div>
         <div class="media-body">
-            <h2 class="media-heading"><a href="#">Sr. Ryan</a></h2>
-            But who has any right to find fault with a man who chooses to enjoy a pleasure that has
-            no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
+            <h2 class="media-heading"><a href="#">{{ $comment->name }}</a></h2>
+            {{ $comment->comment }}
 
-            <div class="entity_vote">
-                <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></a>
-                <a href="#"><span class="reply_ic">Reply </span></a>
-            </div>
-            <div class="media">
-                <div class="media-left">
-                    <a href="#">
-                        <img alt="64x64" class="media-object" data-src="{{ asset('public/fronts/img/reader_img2.jpg') }}"
-                             src="{{ asset('public/fronts/img/reader_img2.jpg') }}" data-holder-rendered="true">
-                    </a>
-                </div>
-                <div class="media-body">
-                    <h2 class="media-heading"><a href="#">Admin</a></h2>
-                    But who has any right to find fault with a man who chooses to enjoy a pleasure
-                    that has no annoying consequences, or one who avoids a pain that produces no
-                    resultant pleasure?
+{{--            @if ($comment->name = "admin")--}}
 
-                    <div class="entity_vote">
-                        <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
-                        <a href="#"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></a>
-                        <a href="#"><span class="reply_ic">Reply </span></a>
-                    </div>
-                </div>
-            </div>
+{{--            <div class="media">--}}
+{{--                <div class="media-left">--}}
+{{--                    <a href="#">--}}
+{{--                        <img alt="64x64" class="media-object" data-src="{{ asset('public/others/user.png') }}"--}}
+{{--                             src="{{ asset('public/others/user.png') }}" data-holder-rendered="true" width="60">--}}
+{{--                    </a>--}}
+{{--                </div>--}}
+{{--                <div class="media-body">--}}
+{{--                    <h2 class="media-heading"><a href="#">{{ $comment->name }}</a></h2>--}}
+{{--                    {{ $comment->comment }}--}}
+
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            @endif--}}
         </div>
 
     </div>
     <!-- media end -->
+    @endif
+    @endforeach
 
 
 </div>
@@ -145,19 +138,18 @@
     <!--Entity Title -->
 
     <div class="entity_comment_from">
-        <form>
+        {{ Form::open(array('url'=>'/comments','method'=>'post')) }}
+        {{ Form::hidden('slug', $post->slug) }}
+        {{ Form::hidden('post_id', $post->id) }}
             <div class="form-group">
-                <input type="text" class="form-control" id="inputName" placeholder="Name">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" id="inputEmail" placeholder="Email">
+                {{ Form::text('name', null, ['class'=>'form-control', 'id'=>'name', 'placeholder'=>'name']) }}
             </div>
             <div class="form-group comment">
-                <textarea class="form-control" id="inputComment" placeholder="Comment"></textarea>
+                {{ Form::textarea('comment', null, ['class' => 'form-control','id'=>'comment', 'placeholder'=>'comment']) }}
             </div>
 
             <button type="submit" class="btn btn-submit red">Submit</button>
-        </form>
+        {{ Form::close() }}
     </div>
     <!--Entity Comments From -->
 
@@ -185,7 +177,7 @@
 
                         <div class="widget_article_social">
                 <span>
-                    <a href="single.html" target="_self"><i class="fa fa-comments-o"></i>{{ count($item->comments) }}</a> Comments
+                    <a href="#" target="_self"><i class="fa fa-comments-o"></i>{{ count($item->comments) }}</a> Comments
                 </span>
                         </div>
                     </div>

@@ -33,5 +33,13 @@
         } );
     } )( jQuery );
 </script>
+<!-- Toastr Script -->
+<script src="{{ asset('public/admin/assets/js/toastr.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
+<script>
+    @if(Session::has('success'))
+    toastr.success('{{ Session::get('success') }}')
+    @endif
+</script>
 @stack('js')
