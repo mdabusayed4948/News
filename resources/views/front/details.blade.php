@@ -13,7 +13,7 @@
     <!-- entity_title -->
 
     <div class="entity_meta">
-        <a href="{{ url('/author') }}/{{ $post->creator->id }}">{{ $post->creator->name }}</a>, {{ date('F j,Y', strtotime($post->created_at)) }}
+        <a href="{{ url('/author') }}/{{ $post->creator['id'] }}">{{ $post->creator['name'] }}</a>, {{ date('F j,Y', strtotime($post->created_at)) }}
     </div>
     <!-- entity_meta -->
 
@@ -63,11 +63,11 @@
                                      alt="{{ $news->title }}"></a>
                 </div>
                 <div class="media-body">
-                    <span class="tag purple"><a href="{{ url('/category') }}/{{ $news->category_id }}">{{ $news->category->name }}</a></span>
+                    <span class="tag purple"><a href="{{ url('/category') }}/{{ $news->category_id }}">{{ $news->category['name'] }}</a></span>
 
                     <h3 class="media-heading"><a href="{{ url('/details') }}/{{ $news->slug }}">{{ $news->title }}</a></h3>
                     <span class="media-date">
-                        <a href="{{ url('/author') }}/{{ $news->creator->id }}">{{ $news->creator->name }}</a>, {{ date('F j,Y', strtotime($news->created_at)) }}
+                        <a href="{{ url('/author') }}/{{ $news->creator['id'] }}">{{ $news->creator['name'] }}</a>, {{ date('F j,Y', strtotime($news->created_at)) }}
                     </span>
 
                     <div class="media_social">
@@ -173,7 +173,7 @@
                     <div class="media-body">
                         <h3 class="media-heading">
                             <a href="{{ url('/details') }}/{{ $item->slug }}">{{ $item->title }}</a>
-                        </h3> <span class="media-date"><a href="#">{{ date('j F - y', strtotime($item->created_at)) }}</a>,  by: <a href="{{ url('/author') }}/{{ $item->creator->id }}">{{ $item->creator->name }}</a></span>
+                        </h3> <span class="media-date"><a href="#">{{ date('j F - y', strtotime($item->created_at)) }}</a>,  by: <a href="{{ url('/author') }}/{{ $item->creator['id'] }}">{{ $item->creator['name'] }}</a></span>
 
                         <div class="widget_article_social">
                 <span>
